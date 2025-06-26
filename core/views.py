@@ -12,8 +12,10 @@ from django.http import HttpResponse
 import csv
 
 
+@login_required
 def home(request):
     return render(request, 'core/home.html')
+
 
 
 @login_required
