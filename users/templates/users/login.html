@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar sesión</title>
+  <link rel="stylesheet" href="{% static 'core/estilos.css' %}">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: url("{% static 'core/uefa_bg.png' %}") no-repeat center center;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      position: relative;
+    }
+    .form-container {
+      position: absolute;
+      top: 65%;               /* Ajusta este valor para subir/bajar el formulario */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+    .form-container h2 {
+      color: #FFFFFF;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .form-container input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: rgba(255,255,255,0.9);
+    }
+    .form-container button {
+      width: 100%;  
+      background-color: #0055a5;
+      color: white;
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+    .form-container button:hover {
+      background-color: #0073d6;
+      transform: translateY(-2px);
+    }
+    .form-container .enlace-registro {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .form-container .enlace-registro a {
+      color: #FFFFFF;
+      text-decoration: underline;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Iniciar sesión</h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Usuario" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Entrar</button>
+    </form>
+    <div class="enlace-registro">
+      ¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a>
+    </div>
+  </div>
+</body>
+</html>

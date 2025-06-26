@@ -1,0 +1,68 @@
+{% load static %}
+{% load custom_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Panel Admin</title>
+  <link rel="stylesheet" href="{% static 'core/estilos.css' %}">
+</head>
+<body>
+  <h2>Panel del Administrador</h2>
+
+  <h3>Fases</h3>
+  <ul>
+    {% for fase in fases %}
+    <li>
+      {{ fase.nombre }} – 
+      {% if fase.desbloqueada %}
+        ✅ Desbloqueada
+      {% else %}
+        🔒 Bloqueada
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3>Partidos y Predicciones</h3>
+  <table>
+    <tr>
+      <th>Fecha</th>
+      <th>Partido</th>
+      <th>Resultado</th>
+      <th>Predicciones</th>
+    </tr>
+    {% for partido in partidos %}
+    <tr>
+      <td>{{ partido.fecha }}</td>
+      <td>{{ partido.equipo_local }} vs {{ partido.equipo_visitante }}</td>
+      <td>
+        {% if partido.goles_local != None and partido.goles_visitante != None %}
+          {{ partido.goles_local }} - {{ partido.goles_visitante }}
+        {% else %}
+          ⏳ Pendiente
+        {% endif %}
+      </td>
+      <td>
+        {% if predicciones_por_partido|get_item:partido.id %}
+          <ul>
+            {% for p in predicciones_por_partido|get_item:partido.id %}
+              <li>{{ p.usuario.username }} → {{ p.goles_local }} - {{ p.goles_visitante }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          Sin predicciones
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h3>Accesos rápidos</h3>
+  <ul>
+    <li><a href="{% url 'gestion_usuarios' %}">✅ Validar usuarios</a></li>
+    <li><a href="{% url 'clasificacion' %}">📊 Ver clasificación</a></li>
+    <li><a href="{% url 'exportar_ranking' %}">⬇️ Exportar ranking (CSV)</a></li>
+    <li><a href="{% url 'exportar_predicciones' %}">⬇️ Exportar predicciones (CSV)</a></li>
+  </ul>
+</body>
+</html>

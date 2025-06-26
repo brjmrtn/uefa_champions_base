@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resultados en Vivo</title>
+  <link rel="stylesheet" href="{% static 'core/estilos.css' %}">
+</head>
+<body>
+  <h2>Resultados en Vivo</h2>
+  <table>
+    <tr>
+      <th>Partido</th>
+      <th>Marcador</th>
+      <th>Tu Predicción</th>
+      <th>Resultado</th>
+    </tr>
+    {% for r in resultados %}
+    <tr>
+      <td>{{ r.partido.equipo_local }} vs {{ r.partido.equipo_visitante }}</td>
+      <td>
+        {% if r.partido.goles_local != None and r.partido.goles_visitante != None %}
+          {{ r.partido.goles_local }} - {{ r.partido.goles_visitante }}
+        {% else %}
+          ⏳
+        {% endif %}
+      </td>
+      <td>
+        {% if r.prediccion %}
+          {{ r.prediccion.goles_local }} - {{ r.prediccion.goles_visitante }}
+        {% else %}
+          —
+        {% endif %}
+      </td>
+      <td>{{ r.estado }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

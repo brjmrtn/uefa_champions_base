@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear cuenta</title>
+  <link rel="stylesheet" href="{% static 'core/estilos.css' %}">
+  <style>
+    html, body { height: 100%; margin: 0; padding: 0; }
+    body {
+      background: url("{% static 'core/uefa_bg.png' %}") no-repeat center center;
+      background-size: cover;
+      position: relative;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-container {
+      position: absolute;
+      top: 20%;          
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      color: #003366;
+      text-align: center;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-container label {
+      text-align: left;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-container input {
+      width: 100%;           /* Aquí forzamos ancho completo */
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      color: #003366;
+    }
+
+    .form-container input::placeholder {
+      color: #666;
+    }
+
+    .form-container button {
+      width: 100%;           /* Botón también full-width */
+      padding: 12px;
+      background-color: #0055a5;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .form-container button:hover {
+      background-color: #0073d6;
+      transform: translateY(-2px);
+    }
+
+    .form-container .enlace-login {
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .form-container .enlace-login a {
+      color: #0055a5;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Crear cuenta</h2>
+    <form method="post">
+      {% csrf_token %}
+      <label for="id_username">Usuario</label>
+      <input type="text" name="username" id="id_username" placeholder="Nombre de usuario" required>
+      
+      <label for="id_email">Email</label>
+      <input type="email" name="email" id="id_email" placeholder="Dirección de correo" required>
+      
+      <label for="id_password">Contraseña</label>
+      <input type="password" name="password" id="id_password" placeholder="Contraseña" required>
+      
+      <button type="submit">Registrarse</button>
+    </form>
+    <div class="enlace-login">
+      ¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a>
+    </div>
+  </div>
+</body>
+</html>
