@@ -55,5 +55,5 @@ def puntos_por_bonus(usuario):
         if campeon_real is None:
             return 0
         return 5 if bonus.campeon.lower() == campeon_real.lower() else 0
-    except:
+    except PrediccionBonus.DoesNotExist:
         return 0
