@@ -8,7 +8,7 @@ This repository contains a Django project to manage predictions for the UEFA Cha
    ```bash
    python -m venv venv
    source venv/bin/activate
-   pip install django pandas pyspark
+   pip install -r requirements.txt
    ```
 2. **Environment variables**: copy `.env.example` to `.env` and edit the values as needed.
    ```bash
