@@ -28,6 +28,7 @@ def predicciones_disponibles(request):
     fases = Fase.objects.filter(desbloqueada=True).order_by('orden')
     partidos = Partido.objects.filter(fase__in=fases).order_by('fecha')
     predicciones_hechas = Prediccion.objects.filter(usuario=request.user)
+    predicciones_ids = set(predicciones_hechas.values_list('partido_id', flat=True))
 
     if request.method == 'POST':
         for partido in partidos:
@@ -52,7 +53,8 @@ def predicciones_disponibles(request):
 
     return render(request, 'core/predicciones.html', {
         'partidos': partidos,
-        'predicciones': predicciones_hechas
+        'predicciones': predicciones_hechas,
+        'predicciones_ids': predicciones_ids
     })
 
 

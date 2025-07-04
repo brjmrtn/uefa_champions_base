@@ -20,7 +20,7 @@
         <td>{{ partido.equipo_local }} vs {{ partido.equipo_visitante }}</td>
         <td>{{ partido.fecha }}</td>
         <td>
-          {% if partido in predicciones.values_list 'partido' %}
+          {% if partido.id in predicciones_ids %}
             Ya enviado
           {% else %}
             <input type="number" name="goles_local_{{ partido.id }}" min="0" required> -

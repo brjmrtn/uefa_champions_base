@@ -57,5 +57,8 @@ def puntos_por_bonus(usuario):
     campeon_real = obtener_campeon_real()
     if campeon_real is None:
         return 0
-    return 5 if bonus.campeon.lower() == campeon_real.lower() else 0
+    try:
+        return 5 if bonus.campeon.lower() == campeon_real.lower() else 0
+    except Exception:
+        return 0
 
