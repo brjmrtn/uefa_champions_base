@@ -1,8 +1,9 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-secret-key'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-placeholder')
 DEBUG = True
 ALLOWED_HOSTS = []
 
