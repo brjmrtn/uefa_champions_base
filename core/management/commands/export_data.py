@@ -24,7 +24,7 @@ class Command(BaseCommand):
         )
         df_pred= pd.DataFrame.from_records(qs)
         df_pred.to_parquet('data/predicciones.parquet', index=False)
-        self.stdout.write(self.style.SUCCESS('✔ predicciones.parquet creado"'))
+        self.stdout.write(self.style.SUCCESS('✔ predicciones.parquet creado'))
 
         # 3) Exportar bonus (opcional)
         qs = PrediccionBonus.objects.all().values(
