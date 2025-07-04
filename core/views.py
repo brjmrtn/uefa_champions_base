@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Fase, Partido, Prediccion, PerfilUsuario
-from .utils import actualizar_fases_automaticamente, calcular_puntos
+from .utils import actualizar_fases_automaticamente
 from .forms import PrediccionBonusForm
 from .models import PrediccionBonus
 from .utils import calcular_puntos, puntos_por_bonus
