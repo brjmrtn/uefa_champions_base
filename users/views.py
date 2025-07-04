@@ -23,7 +23,9 @@ def login_usuario(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect('home')
+            # redirige a next si viene, o a home
+            next_url = request.POST.get('next') or 'home'
+            return redirect(next_url)
         else:
             messages.error(request, "Credenciales incorrectas.")
     return render(request, 'users/login.html')
